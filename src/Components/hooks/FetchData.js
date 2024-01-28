@@ -9,7 +9,9 @@ const useFetch = (url) => {
     const fetchData = async () => {
       setIsPending(true);
       try {
-        const { data } = await axios.get(`http://localhost:3030/api/v1/${url}`);
+        const { data } = await axios.get(
+          `https://foode-order.onrender.com/api/v1/${url}`
+        );
         if (!data.status == "success") throw new Error(data.statusText);
         setIsPending(false);
         setData(data.data.pizza);
