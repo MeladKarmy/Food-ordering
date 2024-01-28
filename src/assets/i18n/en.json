@@ -1,0 +1,128 @@
+{
+  "hmoe-Page": {
+    "banner": {
+      "header": "People Trust us",
+      "h1": {
+        "span-1": "We're",
+        "span-2": "Serious",
+        "span-3": "For",
+        "span-4": "Food",
+        "span-5": "&",
+        "span-6": "Delivery "
+      },
+      "p-1": "Best cooks and best delivery guys all at your service",
+      "p-2": "Hot tasty food will reach you in 60 minutes",
+      "button": "Watch Video"
+    },
+    "offers": {
+      "header": {
+        "word-1": "Today",
+        "word-2": "Special",
+        "word-3": "Offers"
+      },
+      "p": "Special prices on all types of pizza today only"
+    },
+    "menu": {
+      "header": {
+        "word-1": "Browse",
+        "word-2": "Our",
+        "word-3": "Menu"
+      },
+      "cards": {
+        "card-one": {
+          "title": "PizzA",
+          "des": "Taste moments with our iconic foods - a symphony of unforgettable flavors !"
+        },
+        "card-two": {
+          "title": "Drinks",
+          "des": "Elevate moments with our iconic drinks - a symphony of unforgettable flavors !"
+        },
+        "card-three": {
+          "title": "Offers",
+          "des": "Savor unbeatable deals on our iconic food and drinks - indulge today !"
+        }
+      }
+    }
+  },
+  "about-page": {
+    "banner-header": {
+      "text-one": "Best food",
+      "text-two": "for your taste"
+    },
+    "banner-para": {
+      "text-one": "Discover delectable cuisine and unforgettable moments",
+      "text-two": "in our welcoming, culinary haven"
+    },
+    "services": {
+      "header": {
+        "text-one": "We are ",
+        "text-two": "More ",
+        "text-three": "Than ",
+        "text-four": "Multiple ",
+        "text-five": "Service"
+      },
+      "para": "Immerse yourself in a world of unparalleled service. From exquisite cuisine to hospitality, we redefine excellence, ensuring each moment is an unforgettable experience. Welcome to a realm of unmatched service and culinary delight."
+    },
+    "special-services": {
+      "header": {
+        "text-one": "We're ",
+        "text-two": "Serious ",
+        "text-three": "For ",
+        "text-four": "Food ",
+        "text-five": "Special Occasions "
+      }
+    }
+  },
+  "menu-page": {
+    "header": {
+      "one": "Our ",
+      "two": "Menu"
+    },
+    "des": "Enjoy the delicious taste with professionally crafted pizza for an unforgettable flavor experience."
+  },
+  "contact-page": {
+    "header": {
+      "title": "Contact Us",
+      "des-one": "Get in touch with us! Your feedback matters. feel free to contact us.",
+      "des-two": "We're here to help . Reach us via phone, email, or visit us in person. Stay connected!"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "text-area": "Write Your Massage",
+      "btn": "Send"
+    },
+    "address": {
+      "call": {
+        "title": "Call Us",
+        "detail": "+20 1223567755"
+      },
+      "location": {
+        "title": "Location",
+        "detail": "45 st , Alexandria , Egypt"
+      },
+      "hours": {
+        "title": "Hours Work",
+        "detail": "from 8 Am To 12 Pm"
+      }
+    }
+  },
+  "navbare": {
+    "home": "Home",
+    "about": "About",
+    "menu": "Menu",
+    "contact": "Contact",
+    "button-translate": {
+      "ar": "Translate To Ar",
+      "en": "Translate To En"
+    }
+  },
+  "base-button": {
+    "order-now": "Order Now",
+    "add-to-cart": "Add To Cart",
+    "explore-menu": "Explore Menu",
+    "book-table": "Book A Table"
+  },
+  "footer": {}
+}
