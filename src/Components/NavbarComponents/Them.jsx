@@ -79,15 +79,14 @@ export default function Them() {
           </svg>
         )}
       </button>
-      {!isLogin && (
+      {!isLogin ? (
         <button
           className="block py-1 px-3 rounded-xl bg-red-500 opacity-50 transition-opacity duration-1000 hover:opacity-100"
           onClick={() => navigateTo("/login")}
         >
           <i className="fa-solid fa-right-to-bracket"></i>
         </button>
-      )}
-      {isLogin && (
+      ) : (
         <button
           className="block py-1 px-3 rounded-xl bg-red-500 opacity-50 transition-opacity duration-1000 hover:opacity-100"
           onClick={handelLogOut}

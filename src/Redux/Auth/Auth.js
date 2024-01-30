@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
 
 let data = JSON.parse(localStorage.getItem("token")) || null;
 const initialState = {
@@ -23,7 +24,12 @@ export const AuthSlice = createSlice({
       localStorage.setItem("token", JSON.stringify(state.token));
     },
     logout: (state, action) => {
-      localStorage.removeItem("token");
+      state.token.token = null;
+      state.token.userNameAr = null;
+      state.token.userNameEn = null;
+      state.token.role = null;
+      localStorage.clear("token");
+      toast.success("LogOut Success");
     },
   },
 });
