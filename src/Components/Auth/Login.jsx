@@ -39,7 +39,9 @@ export default function Login() {
         console.log(error);
         i18n.language == "ar"
           ? toast.error("حدث خطاء يرجي المحاوله مره اخري")
-          : toast.error(error.response.data.message);
+          : toast.error(
+              error?.response?.data?.message || "Something happen wrong"
+            );
       }
     } else {
       i18n.language == "ar"
