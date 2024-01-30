@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -12,13 +13,15 @@ const useFetch = (url) => {
         const { data } = await axios.get(
           `https://foode-order.onrender.com/api/v1/${url}`
         );
-        if (!data.status == "success") throw new Error(data.statusText);
+        if (!data.status === "success") throw new Error(data.statusText);
         setIsPending(false);
         setData(data.data.pizza);
         setError(null);
+        // toast.success(data.status);
       } catch (error) {
         setError(`${error} Could not Fetch Data `);
         setIsPending(false);
+        toast.error(error.message);
       }
     };
     fetchData();

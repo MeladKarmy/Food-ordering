@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 import headerImage from "../../assets/Food App/headerImage.png";
 import headerSmallImage from "../../assets/Food App/Dishes4.png";

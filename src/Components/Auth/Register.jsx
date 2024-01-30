@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Register() {
   let { t, i18n } = useTranslation();
+  const navigateTo = useNavigate();
   let [registerValues, setRegisterValues] = useState({
     nameEn: "",
     nameAr: "",
@@ -15,19 +16,54 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+  const validationRegister = () => {
+    let error = false;
+
+    if (!new RegExp("^[A-Za-zs]{4,}$").test(registerValues.nameEn)) {
+      error = true;
+    }
+    if (!new RegExp("^[\u0600-\u06FFs]{4,}$").test(registerValues.nameAr)) {
+      error = true;
+    }
+    if (
+      !new RegExp("^.+@[a-zA-Z_]+?.[a-zA-Z]{2,}$").test(registerValues.email)
+    ) {
+      error = true;
+    }
+    if (!new RegExp("^[0-9]{11}$").test(registerValues.phone)) {
+      error = true;
+    }
+    if (!new RegExp("^[0-9]{11}$").test(registerValues.password)) {
+      error = true;
+    }
+    if (
+      !new RegExp(registerValues.password).test(registerValues.confirmPassword)
+    ) {
+      error = true;
+    }
+  };
   const handelSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:3030/api/v1/auth", {
-        ...registerValues,
-      });
+    if (!validationRegister()) {
+      try {
+        const { data } = await axios.post(
+          "https://foode-order.onrender.com/api/v1/auth/register",
+          {
+            ...registerValues,
+          }
+        );
+        if (data.data.message === "Sign up Success")
+          i18n.language == "ar"
+            ? toast.success("تم تسجيلك بنجاح")
+            : toast.success("Sign up Success");
+        navigateTo("/login", { replace: true });
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    } else {
       i18n.language == "ar"
-        ? Swal.fire("تم ارسال رسالتك")
-        : Swal.fire("massage sent success");
-    } catch (error) {
-      i18n.language == "ar"
-        ? Swal.fire("تم ارسال هذه الرساله من قبل")
-        : Swal.fire(error.response.data.message);
+        ? toast.error("حدث خطأ مـا يرجي المحاوله مره أخري")
+        : toast.error("Something happen wrong");
     }
   };
   const onChange = (e) => {

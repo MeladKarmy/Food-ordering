@@ -5,9 +5,7 @@ import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import Input from "./Input";
 import axios from "axios";
-import Alert from "../Alert";
 import { toast } from "react-toastify";
-import Card from "../CartComponents/Card";
 
 export default function EditPizza() {
   let { id, category } = useParams();
@@ -88,6 +86,7 @@ export default function EditPizza() {
               }`}
               name="nameEn"
               type="text"
+              value={pizzaValues.nameEn}
               onChange={onChange}
             />
           </div>

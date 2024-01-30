@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Swal from "sweetalert2";
 import i18n from "../../i18n";
+import { toast } from "react-toastify";
 
 const initialState = {
   products: [],
@@ -15,12 +15,12 @@ export const cartSlice = createSlice({
       );
       if (product) {
         i18n.language == "ar"
-          ? Swal.fire("! هذا المنتج موجود في عربة التسوق")
-          : Swal.fire("This Product Found In Cart !");
+          ? toast.warning("! هذا المنتج موجود في عربة التسوق")
+          : toast.warning("This Product Found In Cart !");
       } else {
         i18n.language == "ar"
-          ? Swal.fire("تم اضافه منتج")
-          : Swal.fire("This Product Added To Cart");
+          ? toast.success("تم اضافه منتج")
+          : toast.success("This Product Added To Cart");
       }
       return {
         products: product
@@ -35,6 +35,7 @@ export const cartSlice = createSlice({
       };
     },
     removeFromCart: (state, action) => {
+      toast.error("Remove item From Cart !");
       return {
         products: state.products.filter(
           (product) => product._id !== action.payload._id
@@ -42,6 +43,8 @@ export const cartSlice = createSlice({
       };
     },
     clearCart: (state) => {
+      toast.success("Cart Is Empty Now !");
+
       return { products: [] };
     },
     increment: (state, action) => {

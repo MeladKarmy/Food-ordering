@@ -8,13 +8,13 @@ export default function HeaderServices({ text1, text2, para }) {
     <div className="">
       <h3 className="text-3xl font-semibold text-center mb-16  md:text-6xl md:font-bold leading-normal">
         <p className="mb-4">
-          {text1?.map((tex) => (
-            <Span text={tex.word} color={tex?.color} />
+          {text1?.map((tex, index) => (
+            <Span key={index} text={tex.word} color={tex?.color} />
           ))}
         </p>
         <p>
-          {text2?.map((tex) => (
-            <Span text={tex.word} color={tex?.color} />
+          {text2?.map((tex, index) => (
+            <Span key={index} text={tex.word} color={tex?.color} />
           ))}
         </p>
       </h3>

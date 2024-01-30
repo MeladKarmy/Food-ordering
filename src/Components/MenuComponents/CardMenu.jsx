@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Btn from "./Btn";
 
 export default function CardMenu(props) {
   const { t, i18n } = useTranslation();
@@ -25,12 +24,11 @@ export default function CardMenu(props) {
         </h3>
         <p className="text-gray-500 text-lg">
           {i18n.language == "ar"
-            ? props.card.descriptionAr.slice(0, 50) + "...المزيد"
-            : props.card.descriptionEn.slice(0, 50) + "More ..."}
+            ? props.card.descriptionAr.slice(0, 50) + " المزيد ..."
+            : props.card.descriptionEn.slice(0, 50) + " More ..."}
         </p>
       </figcaption>
       <div className=" justify-self-stretch mb-2"></div>
-      {/* <Btn>{t("base-button.order-now")}</Btn> */}
     </figure>
   );
 }

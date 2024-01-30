@@ -2,28 +2,49 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { saveToken, getUserName } from "../../Redux/Auth/Auth";
+import { toast } from "react-toastify";
 
 export default function Login() {
   let { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
+  const navigateTo = useNavigate();
+  const { token } = useSelector((state) => state.Auth);
   let [loginValues, setLoginValues] = useState({
     email: "",
     password: "",
   });
   const handelSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:3030/api/v1/auth", {
-        ...loginValues,
-      });
+    if (
+      new RegExp("^.+@[a-zA-Z_]+?.[a-zA-Z]{2,}$").test(loginValues.email) &&
+      loginValues.password.length >= 8
+    ) {
+      try {
+        const { data } = await axios.post(
+          "https://foode-order.onrender.com/api/v1/auth/login",
+          {
+            ...loginValues,
+          }
+        );
+        dispatch(saveToken(data.data.token));
+        if (data.data.message === "Login Success")
+          i18n.language == "ar"
+            ? toast.success("تم تسجيل الدخول بنجاح")
+            : toast.success("Login Success");
+        navigateTo("/", { replace: true });
+      } catch (error) {
+        console.log(error);
+        i18n.language == "ar"
+          ? toast.error("حدث خطاء يرجي المحاوله مره اخري")
+          : toast.error(error.response.data.message);
+      }
+    } else {
       i18n.language == "ar"
-        ? Swal.fire("تم ارسال رسالتك")
-        : Swal.fire("massage sent success");
-    } catch (error) {
-      i18n.language == "ar"
-        ? Swal.fire("تم ارسال هذه الرساله من قبل")
-        : Swal.fire(error.response.data.message);
+        ? toast.error("الإيميل أو الباسورد غير صحيح")
+        : toast.error("Email OR Password Not Valid");
     }
   };
   const onChange = (e) => {
@@ -43,7 +64,8 @@ export default function Login() {
               i18n.language == "ar" ? "يجب ادخال ايميل صحيح" : "Email Not Valid"
             }`}
             name="email"
-            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
+            pattern="^.+@[a-zA-Z_]+?.[a-zA-Z]{2,}$"
+            // pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
             type="email"
             onChange={onChange}
           />

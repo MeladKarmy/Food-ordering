@@ -36,8 +36,9 @@ export default function MenuHome() {
         </h3>
       </div>
       <div className=" mx-auto mt-16 md:flex md:flex-wrap md:justify-around md:items-center  md:gap-3">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <CartMenu
+            key={index}
             title={card.title}
             des={card.des}
             button={card.button}

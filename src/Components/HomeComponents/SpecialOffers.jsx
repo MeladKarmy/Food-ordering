@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import CardOffersHome from "./CardOffersHome";
 import useFetch from "../hooks/FetchData";
+import Spinner from "../Spinner";
 
 export default function SpecialOffers() {
   let { data, isPending, error } = useFetch("pizza");
@@ -20,6 +21,8 @@ export default function SpecialOffers() {
       </div>
 
       <div className="card mt-40 md:flex md:flex-wrap md:gap-y-28 md:gap-x-4 md:justify-around md:items-stretch lg:gap-x-0.5 ">
+        {isPending && <Spinner />}
+        {error && <h2>{error}</h2>}
         {data?.slice(0, 3).map((offer, index) => (
           <CardOffersHome key={index} offer={offer} />
         ))}

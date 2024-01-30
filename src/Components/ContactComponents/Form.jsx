@@ -3,6 +3,7 @@ import Input from "./Input";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 export default function Form() {
   let { t, i18n } = useTranslation();
@@ -13,22 +14,54 @@ export default function Form() {
     subject: "",
     massage: "",
   });
+  const handelFormValidation = () => {
+    let error = false;
+
+    if (!new RegExp("^[a-zA-Z]{4,}$").test(contactValues.name)) {
+      error = true;
+    }
+    if (
+      !new RegExp("^.+@[a-zA-Z_]+?.[a-zA-Z]{2,}$").test(contactValues.email)
+    ) {
+      error = true;
+    }
+    if (!new RegExp("^[a-zA-Z]{9,}$").test(contactValues.subject)) {
+      error = true;
+    }
+    if (!new RegExp("^[a-zA-Z]{20,}$").test(contactValues.massage)) {
+      error = true;
+    }
+    return error;
+  };
   const handelSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:3030/api/v1/massage",
-        {
-          ...contactValues,
+    if (!handelFormValidation()) {
+      try {
+        const response = await axios.post(
+          "https://foode-order.onrender.com/api/v1/massage",
+          {
+            ...contactValues,
+          }
+        );
+
+        if (response.data.status == "success") {
+          i18n.language == "ar"
+            ? toast.success("تم ارسال رسالتك")
+            : toast.success("massage sent success");
+          setContactValues({
+            name: "",
+            email: "",
+            subject: "",
+            massage: "",
+          });
         }
-      );
-      i18n.language == "ar"
-        ? Swal.fire("تم ارسال رسالتك")
-        : Swal.fire("massage sent success");
-    } catch (error) {
-      i18n.language == "ar"
-        ? Swal.fire("تم ارسال هذه الرساله من قبل")
-        : Swal.fire(error.response.data.message);
+      } catch (error) {
+        i18n.language == "ar"
+          ? toast.error("تم ارسال هذه الرساله من قبل")
+          : toast.error(error.message);
+      }
+    } else {
+      toast.error("Form Not Valid");
     }
   };
   const handleTextAreaChange = (e) => {
@@ -58,6 +91,7 @@ export default function Form() {
             error={"Name must be more than 4 characters"}
             name="name"
             onChange={onChange}
+            value={contactValues.name}
           />
         </div>
         <div className="flex-1">
@@ -66,8 +100,9 @@ export default function Form() {
             placeholder={t("contact-page.form.email")}
             error={"Email Not Valid"}
             name="email"
-            pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,}$"
+            pattern="^.+@[a-zA-Z_]+?\.[a-zA-Z]{2,}$"
             onChange={onChange}
+            value={contactValues.email}
           />
         </div>
       </div>
@@ -80,6 +115,7 @@ export default function Form() {
           pattern={"^[a-zA-Z]{9,}$"}
           onChange={onChange}
           require
+          value={contactValues.subject}
         />
       </div>
       <div className="mt-10 rounded-3xl">
@@ -90,6 +126,7 @@ export default function Form() {
           placeholder={t("contact-page.form.text-area")}
           error={"Name must have more than 4 characters"}
           onChange={handleTextAreaChange}
+          value={contactValues.massage}
         ></textarea>
         <span
           className={`text-red-600 font-semibold ${

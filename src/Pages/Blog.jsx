@@ -11,7 +11,6 @@ export default function Blog() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
   let cart = useSelector((state) => state.cart.products);
-  console.log(cart);
   let { data, isPending, error } = useFetch(`pizza/${id}`);
   const dispatch = useDispatch();
   const navigateTo = useNavigate();

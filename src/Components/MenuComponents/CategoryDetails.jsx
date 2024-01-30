@@ -10,14 +10,13 @@ export default function CategoryDetails({ handelFilter }) {
   const navigateTo = useNavigate();
   let [category, setCategory] = useState("All");
   let { data, isPending, error } = useFetch(`category`);
-  console.log(data);
   const hanelActive = (filter) => {
     handelFilter(filter);
     setCategory(filter);
   };
   return (
     <div className="flex justify-between md:flex-wrap items-center gap-8 flex-col md:flex-row md:justify-around md:items-center ">
-      {error && <NotFound />}
+      {error && <NotFound error={error} />}
 
       {data && (
         <>

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Banner from "../Components/HomeComponents/Banner";
 import SpecialOffers from "../Components/HomeComponents/SpecialOffers";
 import TextBannerHome from "../Components/HomeComponents/TextBannerHome";
 import MenuHome from "../Components/HomeComponents/MenuHome";
-import useFetch from "../Components/hooks/FetchData";
+import Spinner from "../Components/Spinner";
 
 export default function Home() {
   return (
@@ -17,9 +17,11 @@ export default function Home() {
             <TextBannerHome />
           </div>
         </header>
-        <div className="mt-5">
-          <SpecialOffers />
-        </div>
+        <Suspense fallback={<Spinner />}>
+          <div className="mt-5">
+            <SpecialOffers />
+          </div>
+        </Suspense>
         <div className="mt-32">
           <MenuHome />
         </div>

@@ -20,14 +20,14 @@ export default function Banner() {
           {t("about-page.banner-para.text-two")}
         </p>
         <div className="mt-24 flex justify-center gap-x-5">
-          <button
+          {/* <button
             onClick={() => {
               navigateTo("/booking");
             }}
             className="px-4 py-2 text-xl font-semibold rounded-full  text-red-600 border-2 border-gray-300 hover:border-transparent hover:shadow-2xl hover:shadow-red-500"
           >
             {t("base-button.book-table")}
-          </button>
+          </button> */}
           <button
             onClick={() => {
               navigateTo("/menu");

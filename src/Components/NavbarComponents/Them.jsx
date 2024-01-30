@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleThemeMode } from "../../Redux/theme/Theme";
 import { useNavigate } from "react-router-dom";
 import { cartProducts } from "../../Redux/cart/Cart";
+import { logout } from "../../Redux/Auth/Auth";
 
 export default function Them() {
   let dispatch = useDispatch();
@@ -18,12 +19,17 @@ export default function Them() {
     document.body.dir = i18n.dir();
   };
   let cart = useSelector(cartProducts);
+  let isLogin = useSelector((state) => state.Auth.token.token);
   const toggleTheme = () => {
     dispatch(toggleThemeMode());
   };
   const navigateTo = useNavigate();
   const navgiateToCart = () => {
     navigateTo("/cart");
+  };
+  const handelLogOut = () => {
+    dispatch(logout());
+    navigateTo("/", { replace: true });
   };
   return (
     <div className="flex justify-between items-center gap-1">
@@ -73,16 +79,22 @@ export default function Them() {
           </svg>
         )}
       </button>
-      <button
-        className="block py-1 px-3 rounded-xl bg-red-500 opacity-50 transition-opacity duration-1000 hover:opacity-100"
-        onClick={() => navigateTo("/login")}
-      >
-        {i18n.language == "en" ? (
+      {!isLogin && (
+        <button
+          className="block py-1 px-3 rounded-xl bg-red-500 opacity-50 transition-opacity duration-1000 hover:opacity-100"
+          onClick={() => navigateTo("/login")}
+        >
           <i className="fa-solid fa-right-to-bracket"></i>
-        ) : (
+        </button>
+      )}
+      {isLogin && (
+        <button
+          className="block py-1 px-3 rounded-xl bg-red-500 opacity-50 transition-opacity duration-1000 hover:opacity-100"
+          onClick={handelLogOut}
+        >
           <i className="fa-solid fa-right-from-bracket"></i>
-        )}
-      </button>
+        </button>
+      )}
     </div>
   );
 }
