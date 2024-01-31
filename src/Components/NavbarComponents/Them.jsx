@@ -29,7 +29,7 @@ export default function Them() {
   };
   const handelLogOut = () => {
     dispatch(logout());
-    navigateTo("/", { replace: true });
+    navigateTo("/login", { replace: true });
   };
   return (
     <div className="flex justify-between items-center gap-1">
