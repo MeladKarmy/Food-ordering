@@ -26,6 +26,9 @@ import EditPizza from "../Components/AdminComponents/EditPizza";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import IsAdmin from "../Components/protectedRoutes/IsAdmin";
+import IsLogin from "../Components/protectedRoutes/IsLogin";
+import NotLogin from "../Components/protectedRoutes/NotLogin";
 
 export default function Layout() {
   const cart = useSelector((state) => state.cart.products);
@@ -57,16 +60,34 @@ export default function Layout() {
                 <Route path="/menu" element={<Menu />} />
                 <Route path="blog/:id" element={<Blog />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<LoginHome />}>
+                <Route
+                  path="/login"
+                  element={
+                    <NotLogin>
+                      <LoginHome />
+                    </NotLogin>
+                  }
+                >
                   <Route index element={<Login />} />
                   <Route path="register" element={<Register />} />
                 </Route>
                 <Route path="/cart" element={<Cart />} />
                 <Route
                   path="/checkout"
-                  element={cart.length ? <CheckOut /> : <NotFound />}
+                  element={
+                    <IsLogin>
+                      <CheckOut />
+                    </IsLogin>
+                  }
                 />
-                <Route path="/admin" element={<Admin />}>
+                <Route
+                  path="/admin"
+                  element={
+                    <IsAdmin>
+                      <Admin />
+                    </IsAdmin>
+                  }
+                >
                   <Route path="pizza" element={<Pizza />} />
                   <Route path="pizza/:id" element={<EditPizza />} />
                   <Route path="drinks" element={<Drinks />}>
