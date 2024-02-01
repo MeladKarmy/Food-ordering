@@ -12,7 +12,5 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <App />
-    {/* ${i18n.language == "ar" ? "ml-3" : "mr-3"}`} */}
-    {/* {`${document.body.classList.contains("dark") ? "text-gray-600" : ""}`} */}
   </Provider>
 );

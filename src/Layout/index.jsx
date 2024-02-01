@@ -34,7 +34,7 @@ export default function Layout() {
         <div className="text-center">
           <ToastContainer
             position="top-right"
-            autoClose={2000}
+            autoClose={1500}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick={false}

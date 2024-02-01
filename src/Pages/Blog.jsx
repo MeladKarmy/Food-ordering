@@ -29,36 +29,40 @@ export default function Blog() {
   };
   return (
     <div className="container mx-auto ">
+      <div className="mt-36">{error && <Error error={error} />}</div>
       <div className="mt-16 flex flex-col md:flex-row justify-center items-start gap-x-4 p-10  ">
         {isPending && <Spinner />}
-        {error && <Error error={error} />}
-        <div className="w-full md:w-1/2">
-          <Banner image={data?.image} name={data?.nameEn} />
-        </div>
-        <div className="w-full md:w-1/2">
-          <DetailsBlog
-            title={{ ar: data?.nameAr, en: data?.nameEn }}
-            category={data?.category}
-            price={data?.size}
-            desc={{
-              en: data?.descriptionEn,
-              ar: data?.descriptionAr,
-            }}
-            product={data}
-          />
-          <div className="p-6 md:flex md:justify-around md:items-center gap-4">
-            <BtnBlog
-              handelClick={() => {
-                dispatch(addToCart(data));
-              }}
-            >
-              {t("base-button.add-to-cart")}
-            </BtnBlog>
-            <BtnBlog handelClick={addProduct}>
-              {t("base-button.order-now")}
-            </BtnBlog>
-          </div>
-        </div>
+        {data && (
+          <>
+            <div className="w-full md:w-1/2">
+              <Banner image={data?.image} name={data?.nameEn} />
+            </div>
+            <div className="w-full md:w-1/2">
+              <DetailsBlog
+                title={{ ar: data?.nameAr, en: data?.nameEn }}
+                category={data?.category}
+                price={data?.size}
+                desc={{
+                  en: data?.descriptionEn,
+                  ar: data?.descriptionAr,
+                }}
+                product={data}
+              />
+              <div className="p-6 md:flex md:justify-around md:items-center gap-4">
+                <BtnBlog
+                  handelClick={() => {
+                    dispatch(addToCart(data));
+                  }}
+                >
+                  {t("base-button.add-to-cart")}
+                </BtnBlog>
+                <BtnBlog handelClick={addProduct}>
+                  {t("base-button.order-now")}
+                </BtnBlog>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
