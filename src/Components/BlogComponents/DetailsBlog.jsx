@@ -43,7 +43,7 @@ export default function DetailsBlog({ title, category, price, desc, product }) {
         {i18n.language == "ar" ? title.ar : title.en}
       </h4>
       <p className="text-4xl font-semibold text-amber-500">
-        <span className="text-amber-400">★★★ ? ☆☆</span>
+        <span className="text-amber-400">★ ★ ★ ★ ☆</span>
       </p>
       <h4 className="text-4xl font-semibold text-red-500">{price?.medium} $</h4>
       {/* <h6 className="text-2xl font-semibold">

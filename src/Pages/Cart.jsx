@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/CartComponents/Card";
 import cartEmpty from "../assets/Food App/cart-empty.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -66,7 +66,12 @@ export default function Cart() {
                 ))}
               </tbody>
             </table>
-            <button onClick={() => navigateTo("/checkout")}>Checkout</button>
+            <button
+              className="bg-green-400 m-3 text-xl rounded-2xl py-2 px-6 font-semibold opacity-90 hover:opacity-100"
+              onClick={() => navigateTo("/checkout")}
+            >
+              Checkout
+            </button>
           </div>
         ) : (
           <>
