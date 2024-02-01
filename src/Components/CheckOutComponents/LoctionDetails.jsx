@@ -1,56 +1,82 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import Input from "./Input";
 
-export default function LoctionDetails({ sendData }) {
+export default function LoctionDetails({ setDataInfo }) {
   const { t, i18n } = useTranslation();
-  const submit = (event) => {
-    event.preventDefault();
-    sendData({ hello: { k: "khkh" } });
+  const onChange = (e) => {
+    setDataInfo((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
   };
+
   return (
-    <div>
-      <form
-        className=" flex flex-col md:flex-row justify-between items-start  md:flex-wrap "
-        onSubmit={submit}
-      >
-        <label htmlFor="name" className="text-lg w-full md:w-3/6">
-          {i18n.language == "ar" ? "الأسم" : "Name"} :
-          <input
-            type="text"
-            id="name"
-            className=" text-gray-700 px-4 py-1 rounded-3xl m-2 outline-red-500 border"
+    <form className="container mx-auto rounded-3xl  p-10 text-black lg:w-8/12 flex-col justify-center items-center bg-white shadow-2xl shadow-gray-400">
+      <div className="flex flex-col md:flex-row md:gap-x-5 mb-3">
+        <div className="flex-1 mb-4 lg:mb-0">
+          <Input
+            label={i18n.language == "ar" ? "الأسم" : "Name"}
             placeholder={i18n.language == "ar" ? "الأسم" : "Name"}
+            pattern={"^[A-Za-zs]{4,}$"}
+            error={`${
+              i18n.language == "ar"
+                ? " يجب ادخال علي الاقل 4 حروف"
+                : "Must be more than 4 characters"
+            }`}
+            name="name"
+            type="text"
+            onChange={onChange}
           />
-        </label>
-        <label htmlFor="name" className="text-lg w-full md:w-3/6">
-          {i18n.language == "ar" ? "إيميل" : "Email"} :
-          <input
-            type="email"
-            id="Email"
-            className=" text-gray-700 px-4 py-1 rounded-3xl m-2 outline-red-500 border"
+        </div>
+
+        <div className="flex-1 mb-4 lg:mb-0">
+          <Input
+            label={i18n.language == "ar" ? "إيميل" : "Email"}
             placeholder={i18n.language == "ar" ? "إيميل" : "Email"}
+            pattern={"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"}
+            error={`${
+              i18n.language == "ar" ? " يجب ادخال صحيح" : "Email must be Valid "
+            }`}
+            type="email"
+            name="email"
+            onChange={onChange}
           />
-        </label>
-        <label htmlFor="name" className="text-lg w-full md:w-3/6">
-          {i18n.language == "ar" ? "موبايل" : "Phone"} :
-          <input
+        </div>
+      </div>
+      <div className="flex flex-col md:flex-row md:gap-x-5 mb-3">
+        <div className="flex-1 mb-4 lg:mb-0">
+          <Input
+            label={i18n.language == "ar" ? "موبايل" : "Phone"}
+            placeholder={i18n.language == "ar" ? "موبايل" : "Phone"}
+            pattern={"^[0-9]{11}$"}
+            error={`${
+              i18n.language == "ar"
+                ? "رقم هاتف غير صحيح !"
+                : "Phone Number Not Valid !"
+            }`}
             type="number"
             id="phone"
-            className=" text-gray-700 px-4 py-1 rounded-3xl m-2 outline-red-500 border"
-            placeholder={i18n.language == "ar" ? "رقم التواصل" : "Phone No"}
+            name="phone"
+            onChange={onChange}
           />
-        </label>
-        <label htmlFor="name" className="text-lg w-full md:w-3/6">
-          {i18n.language == "ar" ? "العنوان" : "Address"} :
-          <input
-            type="text"
-            id="location"
-            className=" text-gray-700 px-4 py-1 rounded-3xl m-2 outline-red-500 border "
+        </div>
+        <div className="flex-1 mb-4 lg:mb-0">
+          <Input
+            label={i18n.language == "ar" ? "العنوان" : "Address"}
             placeholder={i18n.language == "ar" ? "العنوان" : "Address"}
+            pattern={"^[A-Za-zs]{4,}$"}
+            error={`${
+              i18n.language == "ar"
+                ? " يجب ادخال علي الاقل 4 حروف"
+                : "Must be more than 4 characters"
+            }`}
+            type="text"
+            name="address"
+            onChange={onChange}
           />
-        </label>
-      </form>
-      {/* <button type="submit">send</button> */}
-    </div>
+        </div>
+      </div>
+    </form>
   );
 }

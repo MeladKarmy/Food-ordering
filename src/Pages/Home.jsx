@@ -1,4 +1,3 @@
-import React, { Suspense } from "react";
 import Banner from "../Components/HomeComponents/Banner";
 import SpecialOffers from "../Components/HomeComponents/SpecialOffers";
 import TextBannerHome from "../Components/HomeComponents/TextBannerHome";
@@ -17,11 +16,9 @@ export default function Home() {
             <TextBannerHome />
           </div>
         </header>
-        <Suspense fallback={<Spinner />}>
-          <div className="mt-5">
-            <SpecialOffers />
-          </div>
-        </Suspense>
+        <div className="mt-5">
+          <SpecialOffers />
+        </div>
         <div className="mt-32">
           <MenuHome />
         </div>

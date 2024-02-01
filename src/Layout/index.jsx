@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -7,13 +7,10 @@ import About from "../Pages/About";
 import Menu from "../Pages/Menu";
 import Contact from "../Pages/Contact";
 import Blog from "../Pages/Blog";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import NotFound from "../Components/NotFound";
-import axios from "axios";
 import Spinner from "../Components/Spinner";
-import Swal from "sweetalert2";
 import Cart from "../Pages/Cart";
-import CardMenu from "../Components/MenuComponents/CardMenu";
 import CheckOut from "../Pages/CheckOut";
 import LoginHome from "../Pages/LoginHome";
 import Login from "../Components/Auth/Login";
@@ -23,9 +20,7 @@ import Pizza from "../Components/AdminComponents/Pizza";
 import Category from "../Components/AdminComponents/Category";
 import Drinks from "../Components/AdminComponents/Drinks";
 import EditPizza from "../Components/AdminComponents/EditPizza";
-import { ToastContainer, Zoom, toast } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, Zoom } from "react-toastify";
 import IsAdmin from "../Components/protectedRoutes/IsAdmin";
 import IsLogin from "../Components/protectedRoutes/IsLogin";
 import NotLogin from "../Components/protectedRoutes/NotLogin";
@@ -48,6 +43,7 @@ export default function Layout() {
             draggable
             pauseOnHover
             theme="colored"
+            transition={Zoom}
           />
           <nav>
             <Navbar />

@@ -19,9 +19,9 @@ const useFetch = (url) => {
         setError(null);
         // toast.success(data.status);
       } catch (error) {
-        setError(`${error} Could not Fetch Data `);
+        setError(`${error.message} Could not Fetch Data `);
         setIsPending(false);
-        toast.error(error.message);
+        // toast.error(error.message);
       }
     };
     fetchData();

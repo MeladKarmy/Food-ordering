@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 export default function Form() {
@@ -133,7 +132,9 @@ export default function Form() {
             error ? "inline-block" : "hidden"
           }`}
         >
-          Massage must have more than 20 characters
+          {i18n.language == "ar"
+            ? "يجب ان تحتوي الرساله علي 20 حرف او أكثر"
+            : "Massage must have more than 20 characters"}
         </span>
       </div>
       <button

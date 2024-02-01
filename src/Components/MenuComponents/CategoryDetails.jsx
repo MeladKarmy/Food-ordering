@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useFetch from "../hooks/FetchData";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import Spinner from "../Spinner";
-import NotFound from "../NotFound";
+import { NavLink } from "react-router-dom";
 
 export default function CategoryDetails({ handelFilter }) {
   const { t, i18n } = useTranslation();
-  const navigateTo = useNavigate();
   let [category, setCategory] = useState("All");
   let { data, isPending, error } = useFetch(`category`);
   const hanelActive = (filter) => {
@@ -16,8 +13,6 @@ export default function CategoryDetails({ handelFilter }) {
   };
   return (
     <div className="flex justify-between md:flex-wrap items-center gap-8 flex-col md:flex-row md:justify-around md:items-center ">
-      {error && <NotFound error={error} />}
-
       {data && (
         <>
           <NavLink

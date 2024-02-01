@@ -1,5 +1,4 @@
 import React from "react";
-import BtnBlog from "./BtnBlog";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, decrement, increment } from "../../Redux/cart/Cart";
@@ -46,10 +45,6 @@ export default function DetailsBlog({ title, category, price, desc, product }) {
         <span className="text-amber-400">★ ★ ★ ★ ☆</span>
       </p>
       <h4 className="text-4xl font-semibold text-red-500">{price?.medium} $</h4>
-      {/* <h6 className="text-2xl font-semibold">
-        Category : {i18n.language == "ar" ? category : category}
-      </h6> */}
-      {/* <h6>Price : {price}</h6> */}
       <p className="text-xl font-semibold text-red-500">
         {i18n.language == "ar" ? desc.ar : desc.en}
       </p>

@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/cart/Cart";
 import { useTranslation } from "react-i18next";
 import useFetch from "../Components/hooks/FetchData";
-import { Suspense } from "react";
 import Spinner from "../Components/Spinner";
+import Error from "../Components/Error";
 
 export default function Blog() {
   const { id } = useParams();
@@ -31,7 +31,7 @@ export default function Blog() {
     <div className="container mx-auto ">
       <div className="mt-16 flex flex-col md:flex-row justify-center items-start gap-x-4 p-10  ">
         {isPending && <Spinner />}
-        {error && <h3 className="text-red-500">{error}</h3>}
+        {error && <Error error={error} />}
         <div className="w-full md:w-1/2">
           <Banner image={data?.image} name={data?.nameEn} />
         </div>
