@@ -79,9 +79,9 @@ export default function Layout() {
                 <Route
                   path="/admin"
                   element={
-                    <IsAdmin>
-                      <Admin />
-                    </IsAdmin>
+                    // <IsAdmin>
+                    <Admin />
+                    // </IsAdmin>
                   }
                 >
                   <Route path="pizza" element={<Pizza />} />

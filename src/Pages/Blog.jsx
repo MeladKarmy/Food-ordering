@@ -24,7 +24,14 @@ export default function Blog() {
       navigateTo("/cart");
     } else {
       navigateTo("/cart");
-      dispatch(addToCart(data));
+      dispatch(
+        addToCart({
+          ...data,
+          amount: 1,
+          selectSize: data.size.medium,
+          selectToppings: 0,
+        })
+      );
     }
   };
   return (
@@ -51,7 +58,14 @@ export default function Blog() {
               <div className="p-6 md:flex md:justify-around md:items-center gap-4">
                 <BtnBlog
                   handelClick={() => {
-                    dispatch(addToCart(data));
+                    dispatch(
+                      addToCart({
+                        ...data,
+                        amount: 1,
+                        selectSize: data.size.medium,
+                        selectToppings: 0,
+                      })
+                    );
                   }}
                 >
                   {t("base-button.add-to-cart")}

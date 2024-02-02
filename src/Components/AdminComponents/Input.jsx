@@ -25,7 +25,9 @@ export default function Input(props) {
           pattern={props.pattern}
           required={props?.required}
           name={props.name}
+          value={props.value}
           onChange={handleInputChange}
+          disabled={props?.disabled}
         />
         <span
           className={`text-red-600 font-semibold   ${

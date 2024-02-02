@@ -10,8 +10,12 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      console.log(action.payload);
       const product = state.products.find(
-        (product) => product._id === action.payload._id
+        (product) =>
+          product._id == action.payload._id &&
+          product.selectSize == action.payload.selectSize &&
+          product.selectToppings == action.payload.selectToppings
       );
       if (product) {
         i18n.language == "ar"
@@ -29,7 +33,6 @@ export const cartSlice = createSlice({
               ...state.products,
               {
                 ...action.payload,
-                amount: 1,
               },
             ],
       };
@@ -38,7 +41,13 @@ export const cartSlice = createSlice({
       toast.error("Remove item From Cart !");
       return {
         products: state.products.filter(
-          (product) => product._id !== action.payload._id
+          (product) =>
+            !(
+              product._id == action.payload._id &&
+              product.selectSize == action.payload.selectSize &&
+              product.selectToppings == action.payload.selectToppings &&
+              product.amount == action.payload.amount
+            )
         ),
       };
     },
@@ -47,12 +56,43 @@ export const cartSlice = createSlice({
 
       return { products: [] };
     },
+    selectSizePizza: (state, action) => {
+      return {
+        products: state.products.map((product) =>
+          product._id === action.payload._id &&
+          product.selectSize == action.payload.selectSize &&
+          product.selectToppings == action.payload.selectToppings &&
+          product.amount == action.payload.amount
+            ? {
+                ...product,
+                selectSize: parseInt(action.payload.newSize),
+              }
+            : product
+        ),
+      };
+    },
+    selectSizeToppings: (state, action) => {
+      return {
+        products: state.products.map((product) =>
+          product._id === action.payload._id &&
+          product.selectSize == action.payload.selectSize &&
+          product.selectToppings == action.payload.selectToppings &&
+          product.amount == action.payload.amount
+            ? {
+                ...product,
+                selectToppings: parseInt(action.payload.newSize),
+              }
+            : product
+        ),
+      };
+    },
     increment: (state, action) => {
       return {
         products: state.products.map((product) =>
           product._id === action.payload._id &&
-          product.currentSize == action.payload.currentSize &&
-          product.toppings == action.payload.toppings
+          product.selectSize == action.payload.selectSize &&
+          product.selectToppings == action.payload.selectToppings &&
+          product.amount == action.payload.amount
             ? {
                 ...product,
                 amount: product.amount + 1,
@@ -65,8 +105,9 @@ export const cartSlice = createSlice({
       return {
         products: state.products.map((product) =>
           product._id === action.payload._id &&
-          product.currentSize == action.payload.currentSize &&
-          product.toppings == action.payload.toppings
+          product.selectSize == action.payload.selectSize &&
+          product.selectToppings == action.payload.selectToppings &&
+          product.amount == action.payload.amount
             ? {
                 ...product,
                 amount: product.amount - 1,
@@ -79,6 +120,13 @@ export const cartSlice = createSlice({
 });
 
 export const cartProducts = (state) => state.cart.products;
-export const { addToCart, removeFromCart, clearCart, increment, decrement } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  selectSizePizza,
+  selectSizeToppings,
+  clearCart,
+  increment,
+  decrement,
+} = cartSlice.actions;
 export default cartSlice.reducer;

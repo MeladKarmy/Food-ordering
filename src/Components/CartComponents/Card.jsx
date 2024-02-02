@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { increment, decrement, removeFromCart } from "../../Redux/cart/Cart";
+import React from "react";
+import {
+  increment,
+  decrement,
+  removeFromCart,
+  selectSizeToppings,
+  selectSizePizza,
+} from "../../Redux/cart/Cart";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 export default function Card({ product }) {
   const dispatch = useDispatch();
-  let [price, setPrice] = useState();
-  let [toppings, setToppings] = useState(0);
   const { t, i18n } = useTranslation();
   return (
     <div className="p-6 ">
@@ -28,66 +32,86 @@ export default function Card({ product }) {
                 id="prize"
                 className="inline-block m-1 text-gray-700 appearance-none w-1/2 bg-white-500 border border-gray-300 py-1 px-3 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 name="prize"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={product.selectSize}
+                onChange={(e) =>
+                  dispatch(
+                    selectSizePizza({ ...product, newSize: e.target.value })
+                  )
+                }
               >
-                <option disabled selected className=" w-2">
-                  Select Size
+                <option disabled className=" w-2">
+                  {i18n.language == "ar" ? "اختار الحجم" : "Select Size"}
                 </option>
                 <option className="text-gray-700" value={product.size?.small}>
-                  Small: {product.size?.small} $
+                  {i18n.language == "ar" ? "صغيره" : "Small"} :
+                  {product.size?.small} $
                 </option>
                 <option className="text-gray-700" value={product.size?.medium}>
-                  Medium: {product.size?.medium} $
+                  {i18n.language == "ar" ? "وســط" : "medium"} :
+                  {product.size?.medium} $
                 </option>
                 <option className="text-gray-700" value={product.size?.large}>
-                  Large: {product.size?.large} $
+                  {i18n.language == "ar" ? "كبيـر" : "Large"} :
+                  {product.size?.large} $
                 </option>
               </select>
               <select
                 id="prize"
                 className="inline-block m-1 text-gray-700 appearance-none w-1/2 bg-white-500 border border-gray-300 py-1 px-3 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 name="prize"
-                value={toppings}
-                onChange={(e) => setToppings(e.target.value)}
+                value={product.selectToppings}
+                onChange={(e) =>
+                  dispatch(
+                    selectSizeToppings({ ...product, newSize: e.target.value })
+                  )
+                }
               >
-                <option selected value={0} className="">
-                  No Toppings
+                <option value={0} className="">
+                  {i18n.language == "ar" ? "بدون أضافات" : "No Toppings"}
                 </option>
                 <option
                   className="text-gray-700"
                   value={product.toppingsPrize?.medium}
                 >
-                  medium: {product.toppingsPrize?.medium} $
+                  {i18n.language == "ar" ? "وســط" : "medium"} :
+                  {product.toppingsPrize?.medium} $
                 </option>
                 <option
                   className="text-gray-700"
                   value={product.toppingsPrize?.large}
                 >
-                  Large: {product.toppingsPrize?.large} $
+                  {i18n.language == "ar" ? "كبيـر" : "Large"} :
+                  {product.toppingsPrize?.large} $
                 </option>
               </select>
               <div>
                 {i18n.language == "ar"
-                  ? product.toppingsAr.map((ele) => (
-                      <span className="inline-block m-1 text-sm text-gray-700 bg-red-500 rounded-3xl px-2 py-1">
+                  ? product.toppingsAr.map((ele, index) => (
+                      <span
+                        key={index}
+                        className="inline-block m-1 text-sm text-gray-700 bg-red-500 rounded-3xl px-2 py-1"
+                      >
                         {ele}
                       </span>
                     ))
-                  : product.toppingsEn.map((ele) => (
-                      <span className="inline-block text-sm m-1 text-gray-700 bg-red-500 rounded-3xl px-2 py-1">
+                  : product.toppingsEn.map((ele, index) => (
+                      <span
+                        key={index}
+                        className="inline-block text-sm m-1 text-gray-700 bg-red-500 rounded-3xl px-2 py-1"
+                      >
                         {ele}
                       </span>
                     ))}
               </div>
             </>
           ) : (
-            <p className="text-xl font-semibold text-red-500">
-              {product.price ? product.price + " $" : "20 $"}{" "}
-            </p>
+            ""
+            // <p className="text-xl font-semibold text-red-500">
+            //   {product.price ? product.selectSize + " $" : "20 $"}{" "}
+            // </p>
           )}
           <p className="text-xl font-semibold text-amber-500">
-            {price && price * product.amount + +toppings + " $"}
+            {product.selectSize * product.amount + product.selectToppings} $
           </p>
           <div className="text-center mt-5 flex justify-center items-center gap-x-3">
             <button
