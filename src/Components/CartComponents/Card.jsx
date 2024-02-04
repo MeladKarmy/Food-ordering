@@ -105,14 +105,46 @@ export default function Card({ product }) {
               </div>
             </>
           ) : (
-            ""
-            // <p className="text-xl font-semibold text-red-500">
-            //   {product.price ? product.selectSize + " $" : "20 $"}{" "}
-            // </p>
+            <>
+              <div>
+                {i18n.language == "ar"
+                  ? product.toppingsAr.map((ele, index) => (
+                      <span
+                        key={index}
+                        className="inline-block m-1 text-sm text-gray-700 bg-red-500 rounded-3xl px-2 py-1"
+                      >
+                        {ele}
+                      </span>
+                    ))
+                  : product.toppingsEn.map((ele, index) => (
+                      <span
+                        key={index}
+                        className="inline-block text-sm m-1 text-gray-700 bg-red-500 rounded-3xl px-2 py-1"
+                      >
+                        {ele}
+                      </span>
+                    ))}
+              </div>
+            </>
           )}
-          <p className="text-xl font-semibold text-amber-500">
-            {product.selectSize * product.amount + product.selectToppings} $
-          </p>
+          <div className="mt-3">
+            <span
+              className={`text-xl font-semibold text-amber-500 ${
+                product.offer ? "text-decoration-line: line-through" : ""
+              }`}
+            >
+              {product.offer
+                ? product.offerNumber
+                : product.selectSize * product.amount + product.selectToppings}
+              $
+            </span>
+            {product.offer && (
+              <span className="text-xl font-semibold text-amber-500 mx-10">
+                {product.selectSize * product.amount + product.selectToppings} $
+              </span>
+            )}
+          </div>
+
           <div className="text-center mt-5 flex justify-center items-center gap-x-3">
             <button
               className="text-2xl text-red-500 font-semibold"

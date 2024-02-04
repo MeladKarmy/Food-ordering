@@ -28,7 +28,7 @@ export default function Blog() {
         addToCart({
           ...data,
           amount: 1,
-          selectSize: data.size.medium,
+          selectSize: parseInt(data.size.medium),
           selectToppings: 0,
         })
       );

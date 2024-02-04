@@ -79,7 +79,7 @@ export default function Form() {
   return (
     <form
       onSubmit={handelSubmit}
-      className="container mx-auto rounded-3xl p-10 mb-10  text-black lg:w-8/12 flex-col justify-center items-center bg-white shadow-2xl shadow-gray-400"
+      className="container mx-auto rounded-3xl p-10 mb-10  text-black lg:w-8/12 flex-col justify-center items-center bg-white shadow-lg shadow-gray-400"
     >
       <div className="lg:flex lg:justify-between lg:items-center lg:gap-x-12 mb-4">
         <div className="flex-1 mb-4 lg:mb-0">

@@ -100,8 +100,16 @@ export default function Cart() {
                       )}
                     </td>
                     <td className="p-3">
-                      {product.selectSize * product.amount +
-                        product.selectToppings}
+                      {product.offer &&
+                        eval(
+                          (product.selectSize -
+                            product.selectSize * product.offerNumber) *
+                            product.amount +
+                            product?.selectToppings
+                        )}
+                      {!product.offer &&
+                        product.selectSize * product.amount +
+                          product.selectToppings}
                       $
                     </td>
                   </tr>

@@ -1,13 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LinksNavigat from "./NavbarComponents/LinksNavigat";
 import Logo from "./NavbarComponents/Logo";
 import Them from "./NavbarComponents/Them";
 import menuIcon from "../assets/Food App/navmenu.svg";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  let { theme } = useSelector((state) => state.theme);
   let [openMenu, setOpenMenu] = useState(false);
+  const [scrollClass, setScrollClass] = useState("");
+  let navRef = useRef();
+  const scroll = () => {
+    let didScroll = false;
+    window.onscroll = () => (
+      (didScroll = true),
+      theme == "light"
+        ? (setScrollClass("bg-amber-300"),
+          setOpenMenu((prev) => (prev == true ? false : false)))
+        : (setScrollClass("bg-red-300"),
+          setOpenMenu((prev) => (prev == true ? false : false)))
+    );
+    setInterval(() => {
+      if (didScroll) {
+        didScroll = false;
+        setScrollClass("");
+      }
+    }, 700);
+  };
+  useEffect(() => {
+    scroll();
+  }, [openMenu, scrollClass]);
+
   return (
-    <nav className="w-full fixed top-0 left-0 z-50">
+    <nav
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-100 ${scrollClass}`}
+      ref={navRef}
+    >
       <main className="container p-1 mx-auto">
         <div className="flex flex-wrap justify-between items-center md:flex-nowrap">
           <Logo />
