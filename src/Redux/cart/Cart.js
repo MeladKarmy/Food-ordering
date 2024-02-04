@@ -74,8 +74,8 @@ export const cartSlice = createSlice({
       return {
         products: state.products.map((product) =>
           product._id === action.payload._id &&
-          product.selectSize == action.payload.selectSize &&
-          product.selectToppings == action.payload.selectToppings &&
+          product?.selectSize == action?.payload?.selectSize &&
+          product?.selectToppings == action?.payload?.selectToppings &&
           product.amount == action.payload.amount
             ? {
                 ...product,
@@ -89,9 +89,9 @@ export const cartSlice = createSlice({
       return {
         products: state.products.map((product) =>
           product._id === action.payload._id &&
-          product.selectSize == action.payload.selectSize &&
-          product.selectToppings == action.payload.selectToppings &&
-          product.amount == action.payload.amount
+          product?.selectSize == action?.payload?.selectSize &&
+          product?.selectToppings == action?.payload?.selectToppings &&
+          product?.amount == action?.payload?.amount
             ? {
                 ...product,
                 amount: product.amount + 1,
@@ -104,9 +104,9 @@ export const cartSlice = createSlice({
       return {
         products: state.products.map((product) =>
           product._id === action.payload._id &&
-          product.selectSize == action.payload.selectSize &&
-          product.selectToppings == action.payload.selectToppings &&
-          product.amount == action.payload.amount
+          product?.selectSize == action?.payload?.selectSize &&
+          product?.selectToppings == action?.payload?.selectToppings &&
+          product?.amount == action?.payload?.amount
             ? {
                 ...product,
                 amount: product.amount - 1,

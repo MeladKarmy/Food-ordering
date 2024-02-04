@@ -45,16 +45,7 @@ export default function Blog() {
               <Banner image={data?.image} name={data?.nameEn} />
             </div>
             <div className="w-full md:w-1/2">
-              <DetailsBlog
-                title={{ ar: data?.nameAr, en: data?.nameEn }}
-                category={data?.category}
-                price={data?.size}
-                desc={{
-                  en: data?.descriptionEn,
-                  ar: data?.descriptionAr,
-                }}
-                product={data}
-              />
+              <DetailsBlog product={data} />
               <div className="p-6 md:flex md:justify-around md:items-center gap-4">
                 <BtnBlog
                   handelClick={() => {
@@ -62,7 +53,7 @@ export default function Blog() {
                       addToCart({
                         ...data,
                         amount: 1,
-                        selectSize: data.size.medium,
+                        selectSize: data?.size?.medium || 0,
                         selectToppings: 0,
                       })
                     );

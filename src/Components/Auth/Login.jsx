@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { saveToken, getUserName } from "../../Redux/Auth/Auth";
+import { saveToken } from "../../Redux/Auth/Auth";
 import { toast } from "react-toastify";
 
-export default function Login() {
+export default function Login(props) {
+  const location = useLocation();
+  let path = location?.state?.path || "/";
+
+  console.log(path);
   let { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
@@ -30,13 +34,13 @@ export default function Login() {
           }
         );
         dispatch(saveToken(data.data.token));
-        if (data.data.message === "Login Success")
+        if (data.data.message === "Login Success") {
           i18n.language == "ar"
             ? toast.success("تم تسجيل الدخول بنجاح")
             : toast.success("Login Success");
-        navigateTo("/", { replace: true });
+          navigateTo(path, { replace: true });
+        }
       } catch (error) {
-        console.log(error);
         i18n.language == "ar"
           ? toast.error("حدث خطاء يرجي المحاوله مره اخري")
           : toast.error(

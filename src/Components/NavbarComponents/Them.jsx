@@ -37,9 +37,9 @@ export default function Them() {
         onClick={navgiateToCart}
         className="block py-1 rounded-xl text-red-500  transition-opacity duration-1000 hover:opacity-100 relative"
       >
-        <i className="fa-solid fa-cart-shopping text-xl"></i>
+        <i className="fa-solid fa-cart-shopping text-2xl"></i>
         {cart.length ? (
-          <span className="absolute -top-2 left-1 font-semibold   text-red-500 bg-amber-500 rounded-full px-[4px] py-0 -z-10 ">
+          <span className="absolute -top-2 left-2 font-semibold   text-red-500 bg-amber-500 rounded-full px-1 py-0 -z-10 ">
             {cart.length && cart.length}
           </span>
         ) : (

@@ -15,11 +15,25 @@ export default function Cart() {
   let [totalAmount, setTotalAmount] = useState(0);
   let setTotal = () => {
     let checkOut = products.reduce((prev, product) => {
-      let totalProduct =
-        product.selectSize * product.amount + product.selectToppings;
-      return prev + totalProduct;
+      if (!product.offer) {
+        let totalProduct =
+          product.selectSize * product.amount +
+          product.selectToppings * product.amount;
+        return prev + totalProduct;
+      } else {
+        let totalProduct =
+          parseFloat(
+            eval(
+              (product.selectSize -
+                (product.selectSize * product.offerNumber) / 100) *
+                product.amount
+            ).toFixed(3)
+          ) +
+          parseFloat(eval(product.amount * product?.selectToppings).toFixed(3));
+        return prev + totalProduct;
+      }
     }, 0);
-    setTotalPrice(checkOut);
+    setTotalPrice(parseFloat(checkOut.toFixed(3)));
   };
   let setAmount = () => {
     let checkOut = products.reduce((prev, product) => {
@@ -89,7 +103,27 @@ export default function Cart() {
                       />
                     </td>
                     <td className="p-3">{product.amount}</td>
-                    <td className="p-3">{product.selectSize} $</td>
+                    <td className="p-3">
+                      {product?.offer ? (
+                        <span className="flex justify-around items-center">
+                          <span className="text-decoration-line: line-through font-medium text-red-500">
+                            {product.selectSize} $
+                          </span>
+                          <span className="font-medium text-amber-500">
+                            {parseFloat(
+                              eval(
+                                product.selectSize -
+                                  (product.selectSize * product.offerNumber) /
+                                    100
+                              )
+                            )}
+                            $
+                          </span>
+                        </span>
+                      ) : (
+                        <span>{product.selectSize} $</span>
+                      )}
+                    </td>
                     <td className="p-3">
                       {product.selectToppings ? (
                         `${product.selectToppings} $`
@@ -101,15 +135,22 @@ export default function Cart() {
                     </td>
                     <td className="p-3">
                       {product.offer &&
-                        eval(
-                          (product.selectSize -
-                            product.selectSize * product.offerNumber) *
-                            product.amount +
-                            product?.selectToppings
-                        )}
+                        parseFloat(
+                          eval(
+                            (product.selectSize -
+                              (product.selectSize * product.offerNumber) /
+                                100) *
+                              product.amount
+                          ).toFixed(2)
+                        ) +
+                          parseFloat(
+                            eval(
+                              product.amount * product?.selectToppings
+                            ).toFixed(2)
+                          )}
                       {!product.offer &&
                         product.selectSize * product.amount +
-                          product.selectToppings}
+                          product?.selectToppings * product.amount}
                       $
                     </td>
                   </tr>
@@ -125,16 +166,10 @@ export default function Cart() {
                   <td className="p-3">{totalAmount}</td>
                   <td className="p-3"></td>
                   <td className="p-3"></td>
-                  <td className="p-3">{totalPrice}</td>
+                  <td className="p-3">{totalPrice}$</td>
                 </tr>
               </tfoot>
             </table>
-            <button
-              className="bg-green-400 m-3 text-xl rounded-2xl py-2 px-6 font-semibold opacity-90 hover:opacity-100"
-              onClick={() => navigateTo("/checkout")}
-            >
-              {i18n.language == "ar" ? "الدفع" : "Checkout"}
-            </button>
           </div>
         ) : (
           <>
@@ -152,6 +187,12 @@ export default function Cart() {
           </>
         )}
       </div>
+      <button
+        className="bg-green-400 m-3 text-xl rounded-2xl py-2 px-6 font-semibold opacity-90 hover:opacity-100"
+        onClick={() => navigateTo("/checkout")}
+      >
+        {i18n.language == "ar" ? "الدفع" : "Checkout"}
+      </button>
       <div className="w-full">
         {products && (
           <div>
@@ -161,7 +202,6 @@ export default function Cart() {
           </div>
         )}
       </div>
-      {/* <p>Total Price : {totalPrice} $</p> */}
     </div>
   );
 }
