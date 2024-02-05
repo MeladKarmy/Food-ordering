@@ -9,6 +9,7 @@ const initialState = {
     userNameAr: data?.userNameAr || null,
     userNameEn: data?.userNameEn || null,
     role: data?.role || null,
+    userId: data?.userId || null,
   },
 };
 export const AuthSlice = createSlice({
@@ -21,6 +22,7 @@ export const AuthSlice = createSlice({
       state.token.userNameAr = user.nameAr;
       state.token.userNameEn = user.nameEn;
       state.token.role = user.role;
+      state.token.userId = user.userId;
       localStorage.setItem("token", JSON.stringify(state.token));
     },
     logout: (state, action) => {
@@ -28,6 +30,7 @@ export const AuthSlice = createSlice({
       state.token.userNameAr = null;
       state.token.userNameEn = null;
       state.token.role = null;
+      state.token.userId = null;
       localStorage.clear("token");
       toast.success("LogOut Success");
     },

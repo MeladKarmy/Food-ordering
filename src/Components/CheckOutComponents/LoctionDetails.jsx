@@ -18,7 +18,7 @@ export default function LoctionDetails({ setDataInfo }) {
           <Input
             label={i18n.language == "ar" ? "الأسم" : "Name"}
             placeholder={i18n.language == "ar" ? "الأسم" : "Name"}
-            pattern={"^[A-Za-zs]{4,}$"}
+            pattern={"^.{4,}$"}
             error={`${
               i18n.language == "ar"
                 ? " يجب ادخال علي الاقل 4 حروف"
@@ -34,9 +34,11 @@ export default function LoctionDetails({ setDataInfo }) {
           <Input
             label={i18n.language == "ar" ? "إيميل" : "Email"}
             placeholder={i18n.language == "ar" ? "إيميل" : "Email"}
-            pattern={"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"}
+            pattern={"^.+@[a-zA-Z_]+?.[a-zA-Z]{2,}$"}
             error={`${
-              i18n.language == "ar" ? " يجب ادخال صحيح" : "Email must be Valid "
+              i18n.language == "ar"
+                ? " يجب ادخال إيميل صحيح"
+                : "Email must be Valid "
             }`}
             type="email"
             name="email"
@@ -49,7 +51,7 @@ export default function LoctionDetails({ setDataInfo }) {
           <Input
             label={i18n.language == "ar" ? "موبايل" : "Phone"}
             placeholder={i18n.language == "ar" ? "موبايل" : "Phone"}
-            pattern={"^[0-9]{11}$"}
+            pattern={"^0[0-9]{10}$"}
             error={`${
               i18n.language == "ar"
                 ? "رقم هاتف غير صحيح !"
@@ -65,7 +67,7 @@ export default function LoctionDetails({ setDataInfo }) {
           <Input
             label={i18n.language == "ar" ? "العنوان" : "Address"}
             placeholder={i18n.language == "ar" ? "العنوان" : "Address"}
-            pattern={"^[A-Za-zs]{4,}$"}
+            pattern={"^.{4,}$"}
             error={`${
               i18n.language == "ar"
                 ? " يجب ادخال علي الاقل 4 حروف"

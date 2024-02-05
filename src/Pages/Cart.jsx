@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart } from "../Redux/cart/Cart";
 
-export default function Cart() {
+export default function Cart({ sendTotalPrice }) {
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -34,6 +34,7 @@ export default function Cart() {
       }
     }, 0);
     setTotalPrice(parseFloat(checkOut.toFixed(3)));
+    sendTotalPrice(parseFloat(checkOut.toFixed(3)));
   };
   let setAmount = () => {
     let checkOut = products.reduce((prev, product) => {

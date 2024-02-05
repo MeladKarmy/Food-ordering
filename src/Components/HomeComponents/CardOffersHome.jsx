@@ -5,7 +5,6 @@ import { addToCart } from "../../Redux/cart/Cart";
 import { Link } from "react-router-dom";
 
 export default function CardOffersHome({ offer }) {
-  console.log(offer);
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   return (

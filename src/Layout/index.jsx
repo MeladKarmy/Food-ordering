@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -27,7 +27,7 @@ import NotLogin from "../Components/protectedRoutes/NotLogin";
 
 export default function Layout() {
   const cart = useSelector((state) => state.cart.products);
-
+  let [totalPrice, setTotalPrice] = useState();
   return (
     <>
       <BrowserRouter>
@@ -67,12 +67,15 @@ export default function Layout() {
                   <Route index element={<Login />} />
                   <Route path="register" element={<Register />} />
                 </Route>
-                <Route path="/cart" element={<Cart />} />
+                <Route
+                  path="/cart"
+                  element={<Cart sendTotalPrice={setTotalPrice} />}
+                />
                 <Route
                   path="/checkout"
                   element={
                     <IsLogin>
-                      <CheckOut />
+                      <CheckOut total={totalPrice} />
                     </IsLogin>
                   }
                 />

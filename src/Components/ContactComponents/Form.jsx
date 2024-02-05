@@ -24,10 +24,10 @@ export default function Form() {
     ) {
       error = true;
     }
-    if (!new RegExp("^[a-zA-Z]{9,}$").test(contactValues.subject)) {
+    if (contactValues.subject.length < 9) {
       error = true;
     }
-    if (!new RegExp("^[a-zA-Z]{20,}$").test(contactValues.massage)) {
+    if (contactValues.massage < 20) {
       error = true;
     }
     return error;
@@ -65,7 +65,7 @@ export default function Form() {
   };
   const handleTextAreaChange = (e) => {
     const value = e.target.value;
-    if (new RegExp("^[a-zA-Z]{20,}$").test(value)) {
+    if (value.length > 20) {
       setError(false);
     } else {
       setError(true);
@@ -86,7 +86,7 @@ export default function Form() {
           <Input
             label={t("contact-page.form.name")}
             placeholder={t("contact-page.form.name")}
-            pattern={"^[a-zA-Z]{4,}$"}
+            pattern={"^.{4,}$"}
             error={"Name must be more than 4 characters"}
             name="name"
             onChange={onChange}
@@ -111,7 +111,7 @@ export default function Form() {
           placeholder={t("contact-page.form.subject")}
           error={"Subject must have more than 9 characters"}
           name="subject"
-          pattern={"^[a-zA-Z]{9,}$"}
+          pattern={"^.{9,}$"}
           onChange={onChange}
           require
           value={contactValues.subject}
