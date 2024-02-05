@@ -1,55 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decrement, increment } from "../../Redux/cart/Cart";
+import { useSelector } from "react-redux";
 
 export default function DetailsBlog({ product }) {
   const { t, i18n } = useTranslation();
   const cart = useSelector((state) => state.cart.products);
 
-  const dispatch = useDispatch();
   const handelCount = () => {
     if (!cart) return 1;
     let x = cart.find((prod) => prod._id == product?._id);
     if (x) return x.amount;
     else return 1;
-  };
-  const handelIncrement = () => {
-    let currentProduct = cart.find(
-      (currentProduct) => currentProduct._id == product._id
-    );
-
-    if (currentProduct) {
-      dispatch(increment(product));
-    } else {
-      dispatch(
-        addToCart({
-          ...product,
-          amount: 1,
-          selectSize: product?.size?.medium | 0,
-          selectToppings: 0,
-        })
-      );
-      dispatch(increment(product));
-    }
-  };
-  const handelDecrement = () => {
-    let currentProduct = cart.find(
-      (currentProduct) => currentProduct._id == product._id
-    );
-    if (currentProduct) {
-      dispatch(decrement(product));
-    } else {
-      dispatch(
-        addToCart({
-          ...product,
-          amount: 1,
-          selectSize: product?.size?.medium || 0,
-          selectToppings: 0,
-        })
-      );
-      dispatch(decrement(product));
-    }
   };
   return (
     <div className="mt-6 md:m-0 flex flex-col justify-around content-between items-stretch gap-10 text-start">
@@ -81,17 +42,22 @@ export default function DetailsBlog({ product }) {
           : product?.descriptionEn}
       </p>
       <div className="text-red-500">
-        <button
+        {/* <button
           disabled={handelCount() <= 1}
-          onClick={handelDecrement}
+          onClick={() => dispatch(decrement(product))}
           className="m-5 text-4xl"
         >
           -
-        </button>
-        <span className="text-3xl">{handelCount()}</span>
-        <button onClick={handelIncrement} className="m-5 text-3xl">
+        </button> */}
+        <span className="text-3xl">
+          {i18n.language == "ar" ? "الكمية" : "Quantity"} : {handelCount()}
+        </span>
+        {/* <button
+          onClick={() => dispatch(increment(product))}
+          className="m-5 text-3xl"
+        >
           +
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ export default function CategoryDetails({ handelFilter }) {
     setCategory(filter);
   };
   return (
-    <div className="flex justify-between md:flex-wrap items-center gap-8 flex-col md:flex-row md:justify-around md:items-center ">
+    <div className="flex justify-center md:justify-around  items-center  md:p-4">
       {data && (
         <>
           <NavLink

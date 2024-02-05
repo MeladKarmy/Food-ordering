@@ -8,7 +8,7 @@ export default function CardOffersHome({ offer }) {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   return (
-    <div className="relative pt-24 mb-28 rounded-3xl md:mb-0  bg-gradient-to-b from-white to-red-400 shadow-2xl md:w-80 lg:w-64 ">
+    <div className="relative pt-36 md:pt-32 lg:pt-24 mb-28 rounded-3xl md:mb-0  bg-gradient-to-b from-white to-red-400 shadow-2xl md:w-80 lg:w-64 ">
       <div className="w-52 h-52 lg:w-40 lg:h-40 bg-amber-300 mx-auto rounded-full absolute -top-20 -bottom-4 left-1/2 -translate-x-1/2">
         <Link to={`/blog/${offer._id}`}>
           <div className="w-48 h-48 lg:w-36 lg:h-36 border-8 border-white mx-auto rounded-full absolute left-1/2 -translate-x-1/2 top-2 ">
