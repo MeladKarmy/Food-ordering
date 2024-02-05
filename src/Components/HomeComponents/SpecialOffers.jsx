@@ -6,7 +6,7 @@ import Spinner from "../Spinner";
 import Error from "../Error";
 
 export default function SpecialOffers() {
-  let { data, isPending, error } = useFetch("pizza");
+  let { data, isPending, error } = useFetch("pizza/?offer=true&offerNumber=30");
   let { t, i18n } = useTranslation();
   return (
     <div>

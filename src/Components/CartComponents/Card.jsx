@@ -162,7 +162,13 @@ export default function Card({ product }) {
               </span>
             ) : (
               <span className="font-medium text-amber-500">
-                {product.selectSize * product.amount} $
+                {parseFloat(
+                  eval(
+                    product.selectSize * product.amount +
+                      product.amount * product.selectToppings
+                  ).toFixed(2)
+                )}
+                $
               </span>
             )}
             {/* <span

@@ -187,12 +187,14 @@ export default function Cart() {
           </>
         )}
       </div>
-      <button
-        className="bg-green-400 m-3 text-xl rounded-2xl py-2 px-6 font-semibold opacity-90 hover:opacity-100"
-        onClick={() => navigateTo("/checkout")}
-      >
-        {i18n.language == "ar" ? "الدفع" : "Checkout"}
-      </button>
+      {products.length > 0 && (
+        <button
+          className="bg-green-400 m-3 text-xl rounded-2xl py-2 px-6 font-semibold opacity-90 hover:opacity-100"
+          onClick={() => navigateTo("/checkout")}
+        >
+          {i18n.language == "ar" ? "الدفع" : "Checkout"}
+        </button>
+      )}
       <div className="w-full">
         {products && (
           <div>
