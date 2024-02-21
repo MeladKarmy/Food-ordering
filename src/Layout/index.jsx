@@ -20,6 +20,8 @@ import Pizza from "../Components/AdminComponents/Pizza";
 import Category from "../Components/AdminComponents/Category";
 import Drinks from "../Components/AdminComponents/Drinks";
 import EditPizza from "../Components/AdminComponents/EditPizza";
+import Users from "../Components/AdminComponents/Users";
+import Orders from "../Components/AdminComponents/Orders";
 import { ToastContainer, Zoom } from "react-toastify";
 import IsAdmin from "../Components/protectedRoutes/IsAdmin";
 import IsLogin from "../Components/protectedRoutes/IsLogin";
@@ -89,12 +91,14 @@ export default function Layout() {
                 >
                   <Route path="pizza" element={<Pizza />} />
                   <Route path="pizza/:id" element={<EditPizza />} />
-                  <Route path="drinks" element={<Drinks />}>
-                    <Route path=":id" element={<EditPizza />} />
-                  </Route>
-                  <Route path="category" element={<Category />}>
-                    <Route path=":id" element={<EditPizza />} />
-                  </Route>
+                  <Route path="drinks" element={<Drinks />} />
+                  <Route path="drinks/:id" element={<Drinks />} />
+                  <Route path="category" element={<Category />} />
+                  <Route path="category/:id" element={<Category />} />
+                  <Route path="users" element={<Users />} />
+                  <Route path="users/:id" element={<Category />} />
+                  <Route path="orders" element={<Orders />} />
+                  <Route path="orders/:id" element={<Category />} />
                 </Route>
                 <Route path="/*" element={<NotFound />} />
               </Routes>

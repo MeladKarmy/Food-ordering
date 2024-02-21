@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import useFetch from "../../Components/hooks/FetchData";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Spinner";
 import Error from "../Error";
+
 export default function Pizza() {
   const { t, i18n } = useTranslation();
   let { data, isPending, error } = useFetch("pizza");
@@ -12,9 +13,10 @@ export default function Pizza() {
   useEffect(() => {}, []);
   return (
     <div>
-      {isPending && <Spinner />}
       {error ? (
         <Error error={error} />
+      ) : isPending ? (
+        <Spinner />
       ) : (
         <table className="border-collapse border text-gray-700 m-auto w-full ">
           <thead className="bg-amber-500">
@@ -57,22 +59,22 @@ export default function Pizza() {
                 </td>
                 <td className="p-3 font-semibold">
                   <p className="flex justify-between items-center">
-                    <span>small :</span>
+                    <span>{i18n.language == "ar" ? "صغير" : "small"} :</span>
                     <span> {product.size.small}</span>
                   </p>
                   <p className="flex justify-between items-center">
-                    <span>medium :</span>
+                    <span>{i18n.language == "ar" ? "وســط" : "medium"} :</span>
                     <span> {product.size.medium}</span>
                   </p>
                   <p className="flex justify-between items-center">
-                    <span>large :</span>
+                    <span>{i18n.language == "ar" ? "كبيـر" : "large"} :</span>
                     <span> {product.size.large}</span>
                   </p>
                 </td>
                 <td className="p-3">
                   <i
                     className={`${
-                      product.offer
+                      !product.offer
                         ? "fa-solid fa-circle-xmark text-red-600 font-semibold text-xl"
                         : "fa-regular fa-circle-check text-green-600 font-semibold text-xl"
                     }`}

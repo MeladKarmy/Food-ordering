@@ -63,11 +63,14 @@ export default function EditPizza() {
   }, [data]);
   const handelSubmit = async (e) => {
     e.preventDefault();
-    toast.success("good");
     try {
-      const response = await axios.post("http://localhost:3030/api/v1/pizza", {
-        ...pizzaValues,
-      });
+      const response = await axios.post(
+        `https://foode-order.onrender.com/api/v1/pizza/${id}`,
+        {
+          ...pizzaValues,
+        }
+      );
+      console.log(response.data);
       i18n.language == "ar"
         ? toast.success("تم ارسال رسالتك")
         : toast.success("massage sent success");
@@ -80,9 +83,11 @@ export default function EditPizza() {
   };
   return (
     <div>
-      {isPending && <Spinner />}
+      {}
       {error ? (
         <Error error={error} />
+      ) : isPending ? (
+        <Spinner />
       ) : (
         <form
           onSubmit={handelSubmit}
@@ -175,11 +180,11 @@ export default function EditPizza() {
                 }`}
                 error={`${
                   i18n.language == "ar"
-                    ? "الوصف يجب ان يكون بالانجليزية و 15 حرف او اكثر"
-                    : "Description must be in English & 15 char or more "
+                    ? "الوصف يجب ان يكون بالانجليزية و 4 حرف او اكثر"
+                    : "Description must be in English & 4 char or more "
                 }`}
                 name="descriptionEn"
-                pattern="^[A-Za-zs]{15,}$"
+                pattern="^[A-Za-zs]{4,}$"
                 type="text"
                 value={pizzaValues.descriptionEn}
                 onChange={onChange}
@@ -196,11 +201,11 @@ export default function EditPizza() {
                 }`}
                 error={`${
                   i18n.language == "ar"
-                    ? "الوصف يجب ان يكون بالعربي و 15 حرف او اكثر"
-                    : "Description must be in Arabic & 15 char or more "
+                    ? "الوصف يجب ان يكون بالعربي و 4 حرف او اكثر"
+                    : "Description must be in Arabic & 5 char or more "
                 }`}
                 name="descriptionAr"
-                pattern="^[\u0600-\u06FFs]{15,}$"
+                pattern="^[\u0600-\u06FFs]{4,}$"
                 type="text"
                 value={pizzaValues.descriptionAr}
                 onChange={onChange}
@@ -227,7 +232,7 @@ export default function EditPizza() {
                     : "Toppings must be in English"
                 }`}
                 name="toppingsEn"
-                pattern="^[A-Za-zs]{15,}$"
+                pattern="^[A-Za-zs-,]{3,}$"
                 type="text"
                 value={pizzaValues.toppingsEn}
                 onChange={onChange}
@@ -248,7 +253,7 @@ export default function EditPizza() {
                     : "Toppings must be in Arabic"
                 }`}
                 name="toppingsAr"
-                pattern="^[\u0600-\u06FFs]{15,}$"
+                pattern="^[\u0600-\u06FFs-,]{3,}$"
                 type="text"
                 value={pizzaValues.toppingsAr}
                 onChange={onChange}

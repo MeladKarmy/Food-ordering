@@ -8,11 +8,6 @@ export default function HomeAdmin() {
     {
       text: `${i18n.language == "ar" ? "بـيـتـزا" : "PizzA"}`,
       link: "pizza",
-      para: `${
-        i18n.language == "ar"
-          ? "أضافه, تعديل , حذف "
-          : "Add, Edit, Remove  effortlessly for seamless management"
-      }`,
     },
     {
       text: `${i18n.language == "ar" ? "تـصنـيف" : "Category"}`,
@@ -22,11 +17,19 @@ export default function HomeAdmin() {
       text: `${i18n.language == "ar" ? "المشــروبــات" : "Drinks"}`,
       link: "drinks",
     },
+    {
+      text: `${i18n.language == "ar" ? "المستخدمين" : "Users"}`,
+      link: "users",
+    },
+    {
+      text: `${i18n.language == "ar" ? "الطلبات" : "Orders"}`,
+      link: "orders",
+    },
   ];
   return (
     <div className="flex justify-around items-center">
-      {cards.map((card) => (
-        <CardAdmin text={card.text} link={card.link} />
+      {cards.map((card, index) => (
+        <CardAdmin key={index} text={card.text} link={card.link} />
       ))}
     </div>
   );
