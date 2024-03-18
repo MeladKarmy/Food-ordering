@@ -22,7 +22,7 @@ React Router
 Tailwind
 i18next
 Node js
-MongoDb
+MongoDB
 
 # Conclusion
 
