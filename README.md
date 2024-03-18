@@ -12,12 +12,15 @@ Customization: Customize your pizza with various toppings and crust options.
 Order Placement: Users can easily place orders with a few clicks.
 User Authentication: Secure user authentication to manage accounts and order history.
 Responsive Design: The website is responsive and works well on different screen sizes.
+Dark Mode: Users can toggle between light and dark mode for better viewing experience in different lighting conditions.
+Translation: Multi-language support for users to switch between different languages.
 
 # Technologies Used
 React
 Redux
 React Router
 Tailwind
+i18next
 Node js
 MongoDb
 
